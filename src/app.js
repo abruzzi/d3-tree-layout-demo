@@ -77,23 +77,20 @@ window.onload = () => {
         return 'translate(' + d.y + ',' + d.x + ')';
       });
 
-    nodeEnter
-      .append('circle')
-      .attr('r', 10)
-      .attr('stroke', function(d, i) {
+
+    var rects = nodeEnter
+      .append('rect')
+      .attr('width', '100')
+      .attr('height', '30')
+      .style('fill', function(d, i) {
         return d.children || d._children ? 'steelblue' : color(i);
       })
-      .style('fill', '#fff');
 
-    nodeEnter
+    var text = nodeEnter
       .append('text')
-      .attr('x', function(d) {
-        return d.children || d._children ? -15 : 15;
-      })
-      .attr('dy', '.35em')
-      .attr('text-anchor', function(d) {
-        return d.children || d._children ? 'end' : 'start';
-      })
+      .attr('x', 50)
+      .attr('dy', 20)
+      .attr('text-anchor', 'middle')
       .text(function(d) {
         return d.name;
       })
