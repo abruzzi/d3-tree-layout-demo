@@ -149,10 +149,14 @@ var twChina = [
 
 ```js
 window.onload = () => {
+  //定义画布尺寸
   var width = 1600, height = 900;
+
+  //定义布局器
   var tree = d3.layout.tree()
       .size([height, width]);
 
+  //调用算法进行布局
   var nodes = tree.nodes(twChina[0]);
 
   console.log(nodes);
@@ -164,11 +168,63 @@ window.onload = () => {
 这样我们就可以在控制台上看到每个节点都带上了坐标信息。如果将这些节点绘制出来的话，可以看到这样的效果：
 
 ```js
-
+var circles = nodeEnter
+  .append('circle')
+  .attr('r', 10)
+  .attr('stroke', function(d, i) {
+    return d.children || d._children ? 'steelblue' : color(i);
+  })
+  .style('fill', '#fff');
 ```
 
+当然，通过D3，可以很容易的将节点实现为其他任何的svg元素：
+
+```js
+var rects = nodeEnter
+  .append('rect')
+  .attr('width', '100')
+  .attr('height', '30')
+  .style('fill', function(d, i) {
+    return d.children || d._children ? 'steelblue' : color(i);
+  });
+```
 
 ### 路径生成器
+
+为了简化对于形状的绘制，D3提供了`路径生成器`的机制，用来生成**路径**。这里的路径指的是svg中的**Path**元素。
+
+
+比如有这样一个点的序列：
+
+```js
+var data = [
+  {x: 1, y: 5},
+  {x: 20, y: 20},
+  {x: 40, y: 10},
+  {x: 60, y: 40},
+  {x: 80, y: 5},
+  {x: 100, y: 60}
+];
+```
+
+可以使用直线生成器来将这个数组绘制成一条线：
+
+```js
+var line = d3.svg.line()
+  .x(function(d) { return d.x; })
+  .y(function(d) { return d.y; })
+  .interpolate('basis');
+```
+
+```js
+d3.select('path')
+	.attr('d', line(data));
+```
+
+类似的，D3提供了很多的路径生成器。要连接树的顶点，我们可以使用D3内置的对角线路径生成器：`d3.svg.diagonal()`。
+
+#### 对角线生成器
+
 
 #### 贝塞尔曲线
 

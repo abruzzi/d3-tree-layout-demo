@@ -77,7 +77,6 @@ window.onload = () => {
         return 'translate(' + d.y + ',' + d.x + ')';
       });
 
-
     var rects = nodeEnter
       .append('rect')
       .attr('width', '100')
