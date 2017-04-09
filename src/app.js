@@ -14,6 +14,7 @@ window.onload = () => {
             },
           ],
         },
+
         {
           name: '西安办公室',
           parent: 'ThoughtWorks中国',
@@ -28,17 +29,53 @@ window.onload = () => {
             },
           ],
         },
+
+
+        {
+          name: '深圳办公室',
+          parent: 'ThoughtWorks中国',
+          children: [
+            {
+              name: '许两会',
+              parent: '深圳办公室',
+            },
+            {
+              name: '林泽杭',
+              parent: '深圳办公室',
+            },
+            {
+              name: '吴辰保',
+              parent: '深圳办公室',
+            },
+          ],
+        },
+
+
+
+        {
+          name: '上海办公室',
+          parent: 'ThoughtWorks中国',
+          children: [
+            {
+              name: '张侠',
+              parent: '上海办公室',
+            }
+          ],
+        },
+
+
       ],
     },
   ];
 
   var margin = {top: 20, right: 120, bottom: 20, left: 120},
-    width = 960 - margin.right - margin.left,
-    height = 800 - margin.top - margin.bottom;
+    width = 1600 - margin.right - margin.left,
+    height = 900 - margin.top - margin.bottom;
 
   var i = 0, duration = 750, root;
 
-  var tree = d3.layout.tree().size([height, width]);
+  var nodeWidth = 120, nodeHeight = 30;
+  var tree = d3.layout.tree().nodeSize([nodeWidth+20, nodeHeight])
 
   var diagonal = d3.svg.diagonal()
    .projection(function(d) { return [d.x+60, d.y+15]; });
@@ -49,7 +86,7 @@ window.onload = () => {
     .attr('width', width + margin.right + margin.left)
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    .attr('transform', 'translate(' + (width/2+margin.left) + ',' + margin.top + ')');
 
   root = twChina[0];
 
@@ -84,16 +121,16 @@ window.onload = () => {
 
     var rects = nodeEnter
       .append('rect')
-      .attr('width', '120')
-      .attr('height', '30')
+      .attr('width', nodeWidth)
+      .attr('height', nodeHeight)
       .style('fill', function(d, i) {
         return d.children || d._children ? 'steelblue' : color(i);
       })
 
     var text = nodeEnter
       .append('text')
-      .attr('x', 60)
-      .attr('dy', 20)
+      .attr('x', nodeWidth/2)
+      .attr('dy', nodeHeight/2+5)
       .attr('text-anchor', 'middle')
       .text(function(d) {
         return d.name;
