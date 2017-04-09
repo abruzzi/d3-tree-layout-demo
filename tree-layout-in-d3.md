@@ -234,6 +234,40 @@ var diagonal = d3.svg.diagonal()
 
 #### 贝塞尔曲线
 
+#### 横过来
+
+如果要将整个树横过来，我们需要将节点的X，Y互换，然后将对角线的X，Y互换：
+
+```js
+var nodeEnter = node
+  .enter()
+  .append('g')
+  .attr('class', 'node')
+  .attr('transform', function(d) {
+    return 'translate(' + d.x + ',' + d.y + ')';
+  });
+```
+
+```js
+var diagonal = d3.svg.diagonal()
+ .projection(function(d) { return [d.x, d.y]; });
+```
+
+上图中用的是长方形，而布局器生成的是长方形的（top,left）坐标，需要加上一些偏移量（长方形宽度的一半）。
+
+```js
+var nodeWidth = 100, nodeHeight = 30;
+var diagonal = d3.svg.diagonal()
+ .projection(function(d) { return [d.x+nodeWidth/2, d.y+nodeHeight/2]; });
+```
+
+#### 数据
+
+再加入一些其他的数据，即可生成比较丰满的树形结构：
+
+```js
+
+```
 ### 其他参考
 
 D3中提供了众多的布局器，其他常用的还有：

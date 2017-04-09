@@ -41,7 +41,7 @@ window.onload = () => {
   var tree = d3.layout.tree().size([height, width]);
 
   var diagonal = d3.svg.diagonal()
-   .projection(function(d) { return [d.y, d.x]; });
+   .projection(function(d) { return [d.x+60, d.y+15]; });
 
   var svg = d3
     .select('body')
@@ -65,7 +65,7 @@ window.onload = () => {
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) {
-      d.y = d.depth * 180;
+      d.y = d.depth * 120;
     });
 
     // Declare the nodesâ€¦
@@ -79,12 +79,12 @@ window.onload = () => {
       .append('g')
       .attr('class', 'node')
       .attr('transform', function(d) {
-        return 'translate(' + d.y + ',' + d.x + ')';
+        return 'translate(' + d.x + ',' + d.y + ')';
       });
 
     var rects = nodeEnter
       .append('rect')
-      .attr('width', '100')
+      .attr('width', '120')
       .attr('height', '30')
       .style('fill', function(d, i) {
         return d.children || d._children ? 'steelblue' : color(i);
@@ -92,7 +92,7 @@ window.onload = () => {
 
     var text = nodeEnter
       .append('text')
-      .attr('x', 50)
+      .attr('x', 60)
       .attr('dy', 20)
       .attr('text-anchor', 'middle')
       .text(function(d) {
