@@ -40,6 +40,9 @@ window.onload = () => {
 
   var tree = d3.layout.tree().size([height, width]);
 
+  var diagonal = d3.svg.diagonal()
+   .projection(function(d) { return [d.y, d.x]; });
+
   var svg = d3
     .select('body')
     .append('svg')
@@ -55,8 +58,10 @@ window.onload = () => {
   draw(root);
 
   function draw(source) {
+
     // Compute the new tree layout.
-    var nodes = tree.nodes(root).reverse(), links = tree.links(nodes);
+    var nodes = tree.nodes(source).reverse(),
+        links = tree.links(nodes);
 
     // Normalize for fixed-depth.
     nodes.forEach(function(d) {
@@ -94,5 +99,12 @@ window.onload = () => {
         return d.name;
       })
       .style('fill-opacity', 1);
+
+    var link = svg.selectAll("path.link")
+     .data(links, function(d) { return d.target.id; });
+
+     link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", diagonal);
   }
 };

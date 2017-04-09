@@ -225,6 +225,12 @@ d3.select('path')
 
 #### 对角线生成器
 
+```js
+var diagonal = d3.svg.diagonal()
+ .projection(function(d) { return [d.y, d.x]; });
+```
+
+然后用这个生成器结合上面一个小节中生成的树的节点，即可完成连线。
 
 #### 贝塞尔曲线
 

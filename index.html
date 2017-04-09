@@ -5,6 +5,16 @@
     <script src="src/app.js" charset="utf-8"></script>
 
     <style>
+    body, input, textarea, select, button {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+    	font-family: "Pingfang SC", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans;
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+    }
 
     .node circle {
       fill: #fff;
@@ -13,14 +23,15 @@
 
     .node text {
       font: 12px sans-serif;
+      font-weight: 100;
       stroke: #fff;
      }
 
-    .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 2px;
-    }
+     .link {
+       fill: none;
+       stroke: #ccc;
+       stroke-width: 2px;
+     }
 
     </style>
 
