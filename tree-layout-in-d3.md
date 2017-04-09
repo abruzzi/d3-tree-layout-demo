@@ -110,6 +110,56 @@ D3会生成这样的数据：
 
 树布局器`d3.layout.tree()`是另外一种常见的布局器，它可以用来计算有层次结构的数据，并为其分配合适的坐标信息。
 
+比如我们有这样的数据：
+
+```js
+var twChina = [
+  {
+    name: 'ThoughtWorks中国',
+    parent: null,
+    children: [
+      {
+        name: '武汉办公室',
+        parent: 'ThoughtWorks中国',
+        children: [
+          {
+            name: '王静源',
+            parent: '武汉办公室'
+          }
+        ],
+      },
+      {
+        name: '西安办公室',
+        parent: 'ThoughtWorks中国',
+        children: [
+          {
+            name: '邱俊涛',
+            parent: '西安办公室'
+          },
+          {
+            name: '赵孜洋',
+            parent: '西安办公室'
+          },
+        ],
+      },
+    ],
+  },
+];
+```
+
+```js
+window.onload = () => {
+  var width = 1600, height = 900;
+  var tree = d3.layout.tree()
+      .size([height, width]);
+
+  var nodes = tree.nodes(twChina[0]);
+
+  console.log(nodes);
+}
+```
+
+我们可以在控制台上看到每个节点都带上了坐标信息。如果将这些节点绘制出来的话，可以看到这样的效果：
 
 ```js
 

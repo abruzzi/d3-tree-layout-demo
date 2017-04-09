@@ -5,13 +5,13 @@ window.onload = () => {
       parent: null,
       children: [
         {
-          name: '上海办公室',
+          name: '武汉办公室',
           parent: 'ThoughtWorks中国',
           children: [
             {
-              name: '张侠',
-              parent: '上海办公室'
-            },
+              name: '王静源',
+              parent: '武汉办公室'
+            }
           ],
         },
         {
@@ -31,7 +31,7 @@ window.onload = () => {
       ],
     },
   ];
-
+  
   var margin = {top: 20, right: 120, bottom: 20, left: 120},
       width = 960 - margin.right - margin.left,
       height = 800 - margin.top - margin.bottom;
