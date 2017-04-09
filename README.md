@@ -1,4 +1,4 @@
-## 用D3来绘制一棵树
+## 用D3绘制一棵树
 
 ### D3中的布局器
 
@@ -165,7 +165,7 @@ window.onload = () => {
 }
 ```
 
-![console]()
+![console](images/tree-nodes-resized.png)
 
 这样我们就可以在控制台上看到每个节点都带上了坐标信息。如果将这些节点绘制出来的话，可以看到这样的效果：
 
@@ -179,6 +179,8 @@ var circles = nodeEnter
   .style('fill', '#fff');
 ```
 
+![draw](images/draw-the-tree-layout-resized.png)
+
 当然，通过D3，可以很容易的将节点实现为其他任何的svg元素：
 
 ```js
@@ -190,6 +192,8 @@ var rects = nodeEnter
     return d.children || d._children ? 'steelblue' : color(i);
   });
 ```
+
+![draw restyling](images/styling-the-tree-resized.png)
 
 ### 路径生成器
 
@@ -234,6 +238,8 @@ var diagonal = d3.svg.diagonal()
 
 然后用这个生成器结合上面一个小节中生成的树的节点，即可完成连线。
 
+![](images/draw-the-diagonal-resized.png)
+
 #### 贝塞尔曲线
 
 ### 其他定制
@@ -265,11 +271,13 @@ var diagonal = d3.svg.diagonal()
  .projection(function(d) { return [d.x+nodeWidth/2, d.y+nodeHeight/2]; });
 ```
 
+![vertical](images/vertical-tree-resized.png)
+
 #### 更多的数据
 
 再加入一些其他的数据，即可生成比较丰满的树形结构。不过如果某一个层次的节点数太多，节点之间会互相重合：
 
-![]()
+![too many nodes](images/too-many-nodes-resized.png)
 
 我们可以借助树布局器的自动布局功能，在初始化时，制定每个节点的大小。这样D3会自动计算节点间的间距：
 
@@ -278,6 +286,8 @@ var tree = d3.layout.tree().nodeSize([nodeWidth+20, nodeHeight])
 ```
 
 即，不指定画布的大小，而是指定每个节点的大小。
+
+![final result](images/final-result-resized.png)
 
 ### 其他参考
 
