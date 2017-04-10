@@ -242,6 +242,22 @@ var diagonal = d3.svg.diagonal()
 
 #### 贝塞尔曲线
 
+>在数学的数值分析领域中，贝塞尔曲线（英语：Bézier curve）是计算机图形学中相当重要的参数曲线。更高维度的广泛化贝塞尔曲线就称作贝塞尔曲面，其中贝塞尔三角是一种特殊的实例。
+贝塞尔曲线于1962年，由法国工程师皮埃尔·贝塞尔（Pierre Bézier）所广泛发表，他运用贝塞尔曲线来为汽车的主体进行设计。贝塞尔曲线最初由Paul de Casteljau于1959年运用de Casteljau算法开发，以稳定数值的方法求出贝塞尔曲线。
+
+上面这段来自维基百科，简而言之，你只需要知道`贝塞尔曲线`是一个很牛逼的多项式就是了。
+
+如果你觉得不够明白，可以看一下这个公式：
+
+![](images/3rd-bezier.svg)
+
+这里还有一个三阶贝塞尔的动图，注意起始点、终止点以及两个控制点的位置如何影响曲线的走向。
+
+![](images/Bezier_3_big.gif)
+
+看不懂没关系，我也是。不过好在D3已经屏蔽了这些额外的复杂度，你只需要使用`diagonal`就可以自动获得一个三阶的贝塞尔函数，当然代价是你比较难定制曲线的
+形状。
+
 ### 其他定制
 
 #### 横过来
@@ -289,11 +305,30 @@ var tree = d3.layout.tree().nodeSize([nodeWidth+20, nodeHeight])
 
 ![final result](images/final-result-resized.png)
 
+
+### 动态数据
+
+上面的例子中，我们将`inline`的数据绘制成了svg图。如果数据需要动态获取，原理也是一样，D3本身就提供了一些`ajax`的包装：
+
+- d3.csv 请求并尝试将response按照csv格式解析
+- d3.json 请求并尝试将response按照json格式解析
+- d3.text 请求并尝试将response按照纯文本格式解析
+
+比如：
+
+```js
+d3.json('/tree.json', function(error, data) {
+  console.log(data);
+})
+```
+
+在回调中，可以直接使用上述的函数来进行数据的渲染。
+
 ### 其他参考
 
 D3中提供了众多的布局器，其他常用的还有：
 
-- Pie - 饼图生活才能过期
+- Pie - 饼图生成器
 - Bundle（Holten分层绑线算法）
 - Force（基于引力的布局算法）
 - Treemap（树图）
