@@ -324,7 +324,9 @@ d3.json('/tree.json', function(error, data) {
 
 在回调中，可以直接使用上述的函数来进行数据的渲染。
 
-### 其他参考
+### 参考
+
+#### 布局器
 
 D3中提供了众多的布局器，其他常用的还有：
 
@@ -335,3 +337,11 @@ D3中提供了众多的布局器，其他常用的还有：
 - Partition（径向的Treemap）
 
 这里有[JSFiddle的链接](https://jsfiddle.net/juntao/qnxkb6vs/4/)，你可以去看一看实际的运行结果，也可以fork下来自己改。
+
+
+#### 资料
+
+- [SVG中的Path指令](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths)
+- [贝塞尔曲线](https://zh.wikipedia.org/wiki/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A)
+- [D3形状](https://github.com/d3/d3/wiki/SVG-%E5%BD%A2%E7%8A%B6)
+- [D3 Layout](https://github.com/d3/d3-3.x-api-reference/blob/master/Layouts.md)
